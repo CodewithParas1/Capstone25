@@ -20,7 +20,7 @@ const FileControls = ({ fileContent, setFileContent }) => {
   return (
     <div className="mt-4">
       <input type="file" accept=".txt,.json,.fasta" onChange={handleFileUpload} />
-      <div className="flex space-x-2 mt-5">
+      <div className="flex space-x-2 mt-5 justify-center">
         <button
           className="bg-green-500 text-white px-4 py-2 transition-transform duration-300 transform hover:scale-105 hover:bg-green-600"
           onClick={() => handleFileDownload('txt')}

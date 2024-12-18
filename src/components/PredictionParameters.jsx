@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const PredictionParameters = ({
   peptideLength,
   setPeptideLength,
@@ -13,6 +12,7 @@ const PredictionParameters = ({
   handleRun,
   handleReset,
 }) => {
+
   const handleMhcAlleleChange = () => {
     if (mhcAllele && !mhcAlleles.includes(mhcAllele)) {
       setMhcAlleles([...mhcAlleles, mhcAllele]);
@@ -32,27 +32,12 @@ const PredictionParameters = ({
   };
 
   return (
-    <div className="mt-20">
-      <h2 className="font-bold text-3xl">Selecting Prediction Parameters  - </h2>
-
-      {/* Peptide Length Slider */}
-      <div className="mt-5">
-        <label>Peptide Length</label>
-        <input
-          type="range"
-          min="8"
-          max="11"
-          step="1"  // Stepping by whole numbers for clarity
-          value={peptideLength[0]}  // Bind to the first value in the peptideLength array
-          onChange={handlePeptideLengthChange}
-          className="w-2/3 appearance-none h-1 bg-gray-300 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 transition ease-in-out duration-300" // Smaller slider height (h-1)
-        />
-        <div className="mt-5">{peptideLength[0]} - {peptideLength[1]}</div>
-      </div>
+    <div className="mt-10">
+      <h3 className="font-serif text-3xl">Selecting Prediction Parameters  - </h3>
 
       {/* MHC Alleles */}
-      <div className="mt-4 flex items-center">
-        <label className="w-1/4">MHC Allele(s) ---------   </label>
+     <div className="mt-4 flex items-center">
+        <label className="w-1/4">MHC Allele(s)</label>
         <input
           type="text"
           value={mhcAllele}
@@ -71,13 +56,13 @@ const PredictionParameters = ({
       </div>
 
       {/* Model Selector */}
-<div className="mt-10 flex items-center">
-  <label className="w-1/4">Prediction Model</label>
-  <select
-    value={selectedModel}
-    onChange={(e) => setSelectedModel(e.target.value)}
-    className="ml-2 w-2/4 border border-gray-300 px-4 py-2 rounded-md"
-  >
+  <div className="mt-4 flex items-center">
+    <label className="w-1/4">Prediction Model</label>
+    <select
+      value={selectedModel}
+      onChange={(e) => setSelectedModel(e.target.value)}
+      className="ml-2 w-2/4 border border-gray-300 px-4 py-2 rounded-md"
+    >
     <option value="ANN">ANN</option>
     <option value="RNN">RNN</option>
   </select>

@@ -1,7 +1,7 @@
 const OutputTable = ({ outputTable }) => {
   return (
-    <div className="mt-8 pb-24">
-      <h2 className="font-extrabold text-4xl text-gray-800 mb-6 text-center">Prediction Results</h2>
+    <div className="mt-8 pb-24 ml-10 mr-10">
+      <h2 className="font-serif text-4xl text-gray-800 mb-6 text-center">Prediction Results</h2>
       {/* Add scrolling for long tables */}
       <div className="overflow-y-scroll max-h-96 shadow-lg rounded-lg">
         <table className="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
@@ -13,9 +13,6 @@ const OutputTable = ({ outputTable }) => {
               <th className="border px-8 py-6 text-2xl font-semibold">End</th>
               <th className="border px-8 py-6 text-2xl font-semibold">Peptide Length</th>
               <th className="border px-8 py-6 text-2xl font-semibold">Allele(s)</th>
-              <th className="border px-8 py-6 text-2xl font-semibold">Median Bind %</th>
-              <th className="border px-8 py-6 text-2xl font-semibold">NetMHCpan Score</th>
-              <th className="border px-8 py-6 text-2xl font-semibold">NetMHCpan Percentile</th>
             </tr>
           </thead>
           <tbody>
@@ -32,9 +29,6 @@ const OutputTable = ({ outputTable }) => {
                 <td className="border px-8 py-6 text-xl text-gray-700">{row.end}</td>
                 <td className="border px-8 py-6 text-xl text-gray-700">{row.peptideLength}</td>
                 <td className="border px-8 py-6 text-xl text-gray-700">{row.allele}</td>
-                <td className="border px-8 py-6 text-xl text-gray-700">{row.medianBindPercentile}</td>
-                <td className="border px-8 py-6 text-xl text-gray-700">{row.netMHCspanScore}</td>
-                <td className="border px-8 py-6 text-xl text-gray-700">{row.netMHCspanPercentile}</td>
               </tr>
             ))}
           </tbody>

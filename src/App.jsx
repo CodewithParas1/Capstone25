@@ -16,18 +16,20 @@ const App = () => {
 
   const handleRun = () => {
     const tableData = [
-      {
-        seq: 'ATCG',
-        peptide: 'ATC',
-        start: 1,
-        end: 3,
-        peptideLength: peptideLength.join(' - '),
-        allele: mhcAlleles.join(', '),
-        medianBindPercentile: '10%',
-        netMHCspanScore: '0.8',
-        netMHCspanPercentile: '15%',
-      },
+      // {
+      //   seq: 'ATCG',
+      //   peptide: 'ATC',
+      //   start: 1,
+      //   end: 3,
+      //   peptideLength: peptideLength.join(' - '),
+      //   allele: mhcAlleles.join(', '),
+      //   medianBindPercentile: '10%',
+      //   netMHCspanScore: '0.8',
+      //   netMHCspanPercentile: '15%',
+      // },
+      
     ];
+
     setOutputTable(tableData);
     setShowTable(true);
   };
@@ -45,7 +47,7 @@ const App = () => {
     <div className="app-container">
       <Header />
       <div className="flex flex-col md:flex-row justify-between p-6">
-        <div className="left-content w-full md:w-2/3">
+        <div className="left-content w-full md:w-2/3 mx-auto text-center">
           <SequenceInput fileContent={fileContent} setFileContent={setFileContent} />
           <FileControls fileContent={fileContent} setFileContent={setFileContent} />
           <PredictionParameters
@@ -60,11 +62,6 @@ const App = () => {
             handleRun={handleRun}
             handleReset={handleReset}
           />
-        </div>
-        <div className="right-content w-full md:w-1/3">
-          <div className="gene-model bg-gray-100 p-4 rounded-md">
-            <p>3D Gene Model Goes Here</p>
-          </div>
         </div>
       </div>
       {showTable && <OutputTable outputTable={outputTable} />}
