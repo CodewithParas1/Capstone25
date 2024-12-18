@@ -24,27 +24,33 @@ const PredictionParameters = ({
     setMhcAlleles(mhcAlleles.filter((item) => item !== allele));
   };
 
-  // Handle peptide length changes
   const handlePeptideLengthChange = (e) => {
     const newValue = [...peptideLength];
-    newValue[0] = parseInt(e.target.value); // Directly bind to the first value of peptideLength
+    newValue[0] = parseInt(e.target.value);
     setPeptideLength(newValue);
   };
 
   return (
-    <div className="mt-10">
-      <h3 className="font-serif text-3xl">Selecting Prediction Parameters  - </h3>
-
-      {/* MHC Alleles */}
+    <div className="mt-20">
+      <h3 className="font-serif text-3xl wtext-white">Selecting Prediction Parameters  - </h3>
      <div className="mt-4 flex items-center">
         <label className="w-1/4">MHC Allele(s)</label>
-        <input
-          type="text"
-          value={mhcAllele}
-          onChange={(e) => setMhcAllele(e.target.value)}
-          placeholder="Ex: HLA-A*02:01"
-          className="w-2/5 border border-gray-300 px-2 py-1 ml-2 rounded-md"
-  />    
+        <select
+            value={mhcAllele}
+            onChange={(e) => setMhcAllele(e.target.value)}
+            className="w-2/5 border border-gray-300 px-2 py-1 ml-2 rounded-md"
+        >
+            <option value="" disabled>Select an allele</option>
+            <option value="HLA-A*01:01">HLA-A*01:01</option>
+            <option value="HLA-A*02:01">HLA-A*02:01</option>
+            <option value="HLA-A*03:01">HLA-A*03:01</option>
+            <option value="HLA-A*11:01">HLA-A*11:01</option>
+            <option value="HLA-A*24:02">HLA-A*24:02</option>
+            <option value="HLA-B*07:02">HLA-B*07:02</option>
+            <option value="HLA-B*08:01">HLA-B*08:01</option>
+            <option value="HLA-B*15:01">HLA-B*15:01</option>
+        </select>
+   
         <button className="ml-2 bg-blue-500 text-white px-4 py-2" onClick={handleMhcAlleleChange}>Add Allele</button>
         <div className="mt-2">
           {mhcAlleles.map((allele, index) => (
@@ -55,7 +61,6 @@ const PredictionParameters = ({
         </div>
       </div>
 
-      {/* Model Selector */}
   <div className="mt-4 flex items-center">
     <label className="w-1/4">Prediction Model</label>
     <select
