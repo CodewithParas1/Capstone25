@@ -6,6 +6,8 @@ import PredictionParameters from './components/PredictionParameters';
 import OutputTable from './components/OutputTable';
 import '../styles/app.css'
 
+const SERVER_URL = 'http://tools-cluster-interface.iedb.org/tools_api/processing/'
+
 const App = () => {
   const [fileContent, setFileContent] = useState(''); 
   const [peptideLength, setPeptideLength] = useState([8, 10]); 
@@ -40,14 +42,15 @@ const App = () => {
       if(fileContent.length === 0) throw new Error('Please provide sequence');
       if(mhcAlleles.length === 0) throw new Error('Please choose allele type');
 
+      const lengthInput = Array(mhcAlleles.length).fill(9).join(',');
       const dataToSend = new URLSearchParams({
         method: 'recommended',
         sequence_text: fileContent,
         allele: mhcAlleles.join(','),
-        length: '9'
+        length: lengthInput
       });
 
-      const response = await fetch('http://tools-cluster-interface.iedb.org/tools_api/processing/', {
+      const response = await fetch(SERVER_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -70,8 +73,6 @@ const App = () => {
       alert(`${error.message}`);
     }
   };
-
-
 
   const handleReset = () => {
     setFileContent('');
