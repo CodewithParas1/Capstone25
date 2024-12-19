@@ -4,6 +4,7 @@ import SequenceInput from './components/SequenceInput';
 import FileControls from './components/FileControls';
 import PredictionParameters from './components/PredictionParameters';
 import OutputTable from './components/OutputTable';
+import Loading from './components/Loading';
 import '../styles/app.css'
 
 const SERVER_URL = 'http://tools-cluster-interface.iedb.org/tools_api/processing/'
@@ -15,19 +16,14 @@ const App = () => {
   const [mhcAlleles, setMhcAlleles] = useState([]); 
   const [selectedModel, setSelectedModel] = useState('NetMHCpan 4.1 EL');
   const [showTable, setShowTable] = useState(false); 
-  const [outputTable, setOutputTable] = useState([]); 
+  const [outputTable, setOutputTable] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   const parseResponse = (response) => {
-    // Split the response into lines
     const lines = response.trim().split('\n');
-
-    // Extract the header row and split into keys
     const headers = lines[0].trim().split(/\s+/);
-
-    // Process each subsequent line as a data row
     const data = lines.slice(1).map(line => {
       const values = line.trim().split(/\s+/);
-      // Create an object mapping headers to values
       return headers.reduce((obj, key, index) => {
         obj[key] = isNaN(values[index]) ? values[index] : parseFloat(values[index]);
         return obj;
@@ -41,6 +37,8 @@ const App = () => {
     try {
       if(fileContent.length === 0) throw new Error('Please provide sequence');
       if(mhcAlleles.length === 0) throw new Error('Please choose allele type');
+
+      setClicked(true);
 
       const lengthInput = Array(mhcAlleles.length).fill(9).join(',');
       const dataToSend = new URLSearchParams({
@@ -78,9 +76,9 @@ const App = () => {
     setFileContent('');
     setPeptideLength([8, 10]);
     setMhcAlleles([]);
-    setSelectedModel('NetMHCpan 4.1 EL');
     setShowTable(false);
     setOutputTable([]);
+    setClicked(false);
   };
 
   return (
@@ -101,9 +99,12 @@ const App = () => {
             setSelectedModel={setSelectedModel}
             handleRun={handleRun}
             handleReset={handleReset}
+            clicked={clicked}
+            setClicked={setClicked}
           />
         </div>
       </div>
+      {!showTable && clicked && <Loading/>}
       {showTable && <OutputTable outputTable={outputTable} />}
     </div>
   );
